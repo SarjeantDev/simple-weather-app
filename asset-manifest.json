@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/benSarjeantProject5/static/css/main.ed3c3285.chunk.css",
+    "main.js": "/benSarjeantProject5/static/js/main.b2d1ce77.chunk.js",
+    "main.js.map": "/benSarjeantProject5/static/js/main.b2d1ce77.chunk.js.map",
+    "runtime-main.js": "/benSarjeantProject5/static/js/runtime-main.f8b1cb05.js",
+    "runtime-main.js.map": "/benSarjeantProject5/static/js/runtime-main.f8b1cb05.js.map",
+    "static/js/2.1b4acf8f.chunk.js": "/benSarjeantProject5/static/js/2.1b4acf8f.chunk.js",
+    "static/js/2.1b4acf8f.chunk.js.map": "/benSarjeantProject5/static/js/2.1b4acf8f.chunk.js.map",
+    "static/js/3.d2909e2a.chunk.js": "/benSarjeantProject5/static/js/3.d2909e2a.chunk.js",
+    "static/js/3.d2909e2a.chunk.js.map": "/benSarjeantProject5/static/js/3.d2909e2a.chunk.js.map",
+    "index.html": "/benSarjeantProject5/index.html",
+    "static/css/main.ed3c3285.chunk.css.map": "/benSarjeantProject5/static/css/main.ed3c3285.chunk.css.map",
+    "static/js/2.1b4acf8f.chunk.js.LICENSE.txt": "/benSarjeantProject5/static/js/2.1b4acf8f.chunk.js.LICENSE.txt",
+    "static/media/index.css": "/benSarjeantProject5/static/media/headerImagePatrickHendry.5ecd1157.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.f8b1cb05.js",
+    "static/js/2.1b4acf8f.chunk.js",
+    "static/css/main.ed3c3285.chunk.css",
+    "static/js/main.b2d1ce77.chunk.js"
+  ]
+}
