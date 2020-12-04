@@ -1,9 +1,19 @@
+// General App Functionality Description
+// Loads current and forecasted weather based off users input (https://www.weatherapi.com/)
+// Changes background of results screen based off users input (https://unsplash.com/)
+// Ben Sarjeant | Juno College 2020
+
+// General Imports
 import { Component, Fragment } from 'react';
-import firebase from './firebaseUsersLocation.js';
 import './App.js';
+import './App.css';
+// NPM Installs
+import firebase from './firebaseUsersLocation.js';
 import axios from 'axios';
+// Class Components
 import WeatherData from './WeatherData.js';
-import Header from './Header.js'
+import Header from './Header.js';
+import Footer from './Footer.js';
 
 class App extends Component {
   constructor() {
@@ -11,24 +21,16 @@ class App extends Component {
     this.state = {
       locations: [],
       currentWeatherData: [],
+      forecastWeatherData: [],
       weatherLocation: '',
       userInput: '',
-      weatherRange: '',
       weatherLocationBg: '', 
       currentConditionData: ''
     }
   }
 
-//   MVP
-//   1. Landing page welcoming user to site -- done 
-//   2. Prompt user for location of choice, and range of forecast
-// 3. Show weather related to that location from third - party api based off prompt(Weather API)
 
-// Stretch
-// 1. Allow users to save location for future use
-// 2. Allow users view satellite imagery
-// 3. Allow users to see weather on mars for same range of forecast(NASA API)
-
+  // On mount load function that retrieves list of previously saved locations from firebase
   componentDidMount() {
     this.storeUserLocationFB();
   }
@@ -36,25 +38,24 @@ class App extends Component {
   handleInputChange = (e) => {
     this.setState({
       // converting user input to have a capitalized first letter
-      userInput: e.target.value.charAt(0).toUpperCase() + e.target.value.slice(1),
+      userInput: e.target.value.charAt(0).toUpperCase() + e.target.value.slice(1)
     })
   }
 
   handleSubmit = (e) => {
     e.preventDefault();
+    // call both api requests based off of the user input received from the input change
     this.callWeatherAPI(`${this.state.userInput}`);
     this.callUnsplashImgAPI(`${this.state.userInput}`);
   }
 
-  // Function to retrieve list of previously entered locations from Firebase
+
+  // Firebase: Function to retrieve list of previously entered locations from Firebase
   storeUserLocationFB() {
     const dbRef = firebase.database().ref()
- 
     dbRef.on('value', (data) => {
       const firebaseDataObj = data.val();
-
       let locationArray = [];
-
       for (let propertyKey in firebaseDataObj) {
         const propertyVal = firebaseDataObj[propertyKey];
         const formattedObj = {
@@ -63,7 +64,6 @@ class App extends Component {
         }
         locationArray.push(formattedObj)
       }
-
       this.setState({
         locations: locationArray,
       })
@@ -71,98 +71,92 @@ class App extends Component {
   }
   // End of Firebase function
   
-  // Calling weather api to retrieve weather data when user submits button
-  callWeatherAPI = (city) => {
-    const weatherKey = '29c5ceb051fc45c29ac204434202611';
 
+  // WeatherAPI: Calling to retrieve weather data when user clicks submit button
+  // Function takes the city which is derieved from the users input above
+  // Throws error in console regardless of catch if user inputs random string (not a city)
+  callWeatherAPI = (city) => {
     axios({
       method: 'GET',
-      url: 'https://api.weatherapi.com/v1/current.json',
+      url: 'https://api.weatherapi.com/v1/forecast.json',
       dataResponse: 'json',
       params: {
-        key: weatherKey,
-        q: city
+        key: '29c5ceb051fc45c29ac204434202611',
+        q: city,
+        days: 3
       }
     }).then((apiData) => {
-
       this.filterWeatherData(apiData.data);    
       document.getElementById('weatherDataContainer').style.display = 'flex';
-
     }).catch(err => {
-      console.log(err);
       alert("No data for that city, please try again.") 
     })
   }
 
-  // Filtering weather data to add specific text
+  // Filtering weather data to add specific text to DOM and retrieved weather array
+  // Contains series of conditionals to add some text based off of retrieved weather values
   filterWeatherData = (origWeatherData) => {
-    console.log("original weather data", origWeatherData);
-    let currentApiData = origWeatherData.current;
-    const weatherLocationCity = origWeatherData.location.name;
-    const weatherLocationCountry = origWeatherData.location.country;
-    const weatherLocationFullName = weatherLocationCity + ', ' + weatherLocationCountry;
-    const currentCondition = origWeatherData.current.condition.text;
 
+    // variables used in setState at end of function
+    const forecastApiData = origWeatherData.forecast.forecastday;
+    const weatherLocationFullName = origWeatherData.location.name + ', ' + origWeatherData.location.country;
+    const currentCondition = origWeatherData.current.condition.text;
+    
+    // variables used in conditionals
+    // currentApiData holds all the relevant info
+    let currentApiData = origWeatherData.current;
     let currentHumid = origWeatherData.current.humidity;
     let currentWindSpeed = origWeatherData.current.wind_kph;
-    // const currentWindGust = origWeatherData.current.temp_c;
     let currentPrecip = origWeatherData.current.precip_mm;
-    let currentPressure = origWeatherData.current.pressure_in;
-
-    //conditionals for humidity
-    // if (currentHumid >= 60) {
-    //   currentApiData = { ...currentApiData, humidText: "Very windy - stay inside or you'll turn into a kite" };
-    // } else if (currentHumid < 60 & currentHumid >= 40) {
-    //   currentApiData = { ...currentApiData, humidText: "Windy - enjoy the strong winds" };
-    // } else if (currentHumid < 40 & currentHumid >= 15) {
-    //   currentApiData = { ...currentApiData, humidText: "Breezy - the perfect amount of breeze" };
-    // } else {
-    //   currentApiData = { ...currentApiData, humidText: "No wind right now" }
-    // }
-
-    
-    //conditionals for wind speed
-    if (currentWindSpeed >= 60) {
-       currentApiData = {...currentApiData, windText: "Very windy - stay inside or you'll turn into a kite"};
-    } else if (currentWindSpeed < 60 & currentWindSpeed >= 40) {
-      currentApiData = { ...currentApiData, windText: "Windy - enjoy the strong winds"};
-    } else if (currentWindSpeed < 40 & currentWindSpeed >= 15) {
-      currentApiData = { ...currentApiData, windText: "Breezy - the perfect amount of breeze" };
-    } else {
-      currentApiData = {...currentApiData, windText: "Hardly any wind right now"}
-    }
-
 
     // conditionals for precipitation 
     if (currentPrecip >= 20) {
-      currentApiData = {...currentApiData, precipText: "It's raining cats and dogs - stay inside or you'll drown"};
+      currentApiData = { ...currentApiData, precipText: "Hurricane Rain" };
     } else if (currentPrecip < 20 & currentPrecip >= 10) {
-      currentApiData = { ...currentApiData, precipText: "It's pouring - wear that rain coat you don't own"};
+      currentApiData = { ...currentApiData, precipText: "Pouring" };
     } else if (currentPrecip < 10 & currentPrecip >= 4) {
-      currentApiData = { ...currentApiData, precipText: "It's raining - better bundle up" };
+      currentApiData = { ...currentApiData, precipText: "Raining" };
     } else if (currentPrecip < 4 & currentPrecip >= 0.1) {
-      currentApiData = { ...currentApiData, precipText: "It's drizzling - at least it's not pouring" };
+      currentApiData = { ...currentApiData, precipText: "Drizzling" };
     } else {
-      currentApiData = {...currentApiData, precipText: "No rain right now"}
+      currentApiData = { ...currentApiData, precipText: "No Rain" }
     }
 
-  
+    //conditionals for wind speed
+    if (currentWindSpeed >= 60) {
+      currentApiData = { ...currentApiData, windText: "Hurricane Winds" };
+    } else if (currentWindSpeed < 60 & currentWindSpeed >= 30) {
+      currentApiData = { ...currentApiData, windText: "Windy" };
+    } else if (currentWindSpeed < 30 & currentWindSpeed >= 15) {
+      currentApiData = { ...currentApiData, windText: "Breezy" };
+    } else {
+      currentApiData = { ...currentApiData, windText: "Little to no wind" }
+    }
 
+    // conditionals for humidity
+    if (currentHumid >= 85) {
+      currentApiData = { ...currentApiData, humidText: "Very humid" };
+    } else if (currentHumid < 85 & currentHumid >= 50) {
+      currentApiData = { ...currentApiData, humidText: "Humid" };
+    } else if (currentHumid < 50 & currentHumid >= 15) {
+      currentApiData = { ...currentApiData, humidText: "Not Very Humid" };
+    } else {
+      currentApiData = { ...currentApiData, humidText: "No Humidity" }
+    }
 
+    // setting state to reflect updated weather obj
     this.setState({
       weatherLocation: weatherLocationFullName,
       currentWeatherData: currentApiData,
-      currentConditionData: currentCondition
+      currentConditionData: currentCondition,
+      forecastWeatherData: forecastApiData
     });
-       
-
   }
 
 
   // Calling the unsplash API to retrieve a background photo based off of the users requested location
   callUnsplashImgAPI = (city) => {
     const unsplashPhotoKey = 'ZxjN4qAJgh0cJ5Lz2Lm47cXNiqzVZVZ69KLm5386GtM';
-
     axios({
       method: 'GET',
       url: 'https://api.unsplash.com/search/photos',
@@ -173,37 +167,37 @@ class App extends Component {
         orientation: 'landscape'
       }
     }).then((apiData) => {
-      const weatherLocationBgSrc = apiData.data.results[0].urls.regular
+      // setting the state of the weather location background to that of the url retrieved from api
       this.setState({
-        weatherLocationBg: weatherLocationBgSrc
+        weatherLocationBg: apiData.data.results[0].urls.regular
       })
+      // setting the background image of the section holding all weather data based off of the state
       document.getElementById('weatherSection').style.backgroundImage = `url(${this.state.weatherLocationBg})`;
       
     }).catch(err => {
-      console.log(err);
+      // catching to ensure app won't break
+      // was logging the errors to console prior
     })
   }
   // End of unsplash api call
 
   
-  // Function to scroll down to the next section - called from chevron click
+  // Function to scroll down to the next section - called from chevron click in Header class component
   scrollToWeather = () => {
     this.weatherSection.scrollIntoView({ behavior: "smooth" });
   }
 
-  removeLocation = (locId) => {
-    const dbRef = firebase.database().ref()
-    dbRef.child(locId).remove();
-  }
-
+  // START of Firebase functions
+  // Function checks to see if value is already stored in database, if it is let user know otherwise store location
   storeLocation = () => {
     const dbRef = firebase.database().ref();
     let locationTextArray = []
+    // iterating over locations (array holding current firebase items) and pushing the name, not the key to a new array
     this.state.locations.forEach(element => {
       locationTextArray.push(element.name)
     });
+    // seeing if the user input exists in the new array
     const indexOf = locationTextArray.indexOf(this.state.userInput);
-    const userInputCity = this.state.userInput
     if (indexOf >= 0) {
       alert("This city is already a stored location!")
     } else {
@@ -211,6 +205,13 @@ class App extends Component {
     }
   }
 
+  // remove location when user selects the button marked with an X
+  removeLocation = (locId) => {
+    const dbRef = firebase.database().ref()
+    dbRef.child(locId).remove();
+  }
+
+  // load a stored location if user clicks on it - stored locations are shown as an <a> and fire this function on click
   loadPreviousCity = (e) => {
     e.preventDefault();
     this.setState({
@@ -219,18 +220,36 @@ class App extends Component {
     this.callWeatherAPI(e.target.text);
     this.callUnsplashImgAPI(e.target.text);
   }
+  // End of Firebase functions
+
+
+  // function to toggle the forecast 
+  toggleWeatherForecast = (e) => {
+    if (e.target.textContent === "Show Forecast") {
+      document.getElementById('weatherForecast').style.display = 'flex';
+      e.target.textContent = "Hide Forecast"  
+    } else if (e.target.textContent === "Hide Forecast") {
+      document.getElementById('weatherForecast').style.display = 'none';
+      e.target.textContent = "Show Forecast"
+    }
+  }
 
 
   render() { 
     return (
       <Fragment>
         <Header scrollFunc={this.scrollToWeather} />
+        
+        {/* Main section used to change background */}
         <section
-          className="weatherMain"
+          className="weatherMain wrapper"
           id="weatherSection"
           ref={(el) => { this.weatherSection = el; }}>
 
+          {/* Section containing all retrieved weather api info */}
           <section className="requestedWeather">
+
+            {/* Form for user input - handles api calls on submit */}
             <form onSubmit={this.handleSubmit} className="weatherDataForm">
               <label htmlFor="userLocation" className="srOnly">location:</label>
               <input
@@ -241,24 +260,18 @@ class App extends Component {
                 onChange={this.handleInputChange}
               />
               <button>Find Weather</button>
-               
             </form>
-               
 
-            <WeatherData
-              weatherLoc={this.state.weatherLocation}
-              currentWeathCondition={this.state.currentConditionData}
-              currentWeath={this.state.currentWeatherData}
-              bgSrc={this.state.weatherLocationBg}
-              firebaseAddFunc={this.storeLocation}
-            />
-
-            <div className="firebaseStoredLocations">  
+            {/* Firebase stored locations */}
+            <p>Stored Locations</p>
+            <div className="firebaseStoredLocations">
               {
                 this.state.locations.map((loc) => {
                   return (
                     <li key={loc.id}>
-                      <a href="" onClick={this.loadPreviousCity}>{loc.name}</a>
+                      {/* On <a> click fire api call based on selected tag */}
+                      <a href="#weatherSection" onClick={this.loadPreviousCity}>{loc.name}</a>
+                      {/* Button to remove stored location from firebase */}
                       <button className="removeButton" onClick={() => { this.removeLocation(loc.id) }}>X</button>
                     </li>
                   )
@@ -266,11 +279,28 @@ class App extends Component {
               }
             </div>
 
+            {/* Weather Data class component */}
+            <WeatherData
+              weatherLoc={this.state.weatherLocation}
+              currentWeathCondition={this.state.currentConditionData}
+              currentWeath={this.state.currentWeatherData}
+              bgSrc={this.state.weatherLocationBg}
+              firebaseAddFunc={this.storeLocation}
+              weatherForecast={this.toggleWeatherForecast}
+              forecastData={this.state.forecastWeatherData}
+            />
+            
           </section>
+          {/* END OF requestedWeather SECTION */}
+
         </section>
-      </Fragment>       
+        {/* END OF weatherMain SECTION  */}
+      
+        <Footer />
+
+      </Fragment>     
     )
   }
 }
 
-export default App
+export default App;

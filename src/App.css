@@ -10,7 +10,7 @@ html { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: 
 .srOnly { position: absolute; width: 1px; height: 1px; margin: -1px; border: 0; padding: 0; white-space: nowrap; clip-path: inset(100%); clip: rect(0 0 0 0); overflow: hidden;}
 /* End of Setup Snippet */
 
-
+/* GLOBAL STYLES */
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -25,11 +25,33 @@ code {
     monospace;
 }
 
-h1,h2,h3,h4,h5, p {
+h1, h2, h3, h4, h5, p {
   margin: 0;
-  padding: 0;
+  padding: 5px;
 }
 
+a {
+  text-decoration: none;
+  color: white;
+}
+
+a:hover, a:focus {
+  color: grey;
+}
+
+li {
+  list-style: none;
+}
+
+.wrapper {
+    margin: 0 auto;
+    max-width: 1440px;
+    width: 100%;
+}
+/* END OF GLOBAL STYLES */
+
+
+/* HEADER STYLE */
 header {
   min-height: 100vh;
   background-image: url('./cloudImage.jpg');
@@ -45,19 +67,25 @@ header p {
   color: white;
 }
 
-.wrapper {
-    margin: 0 auto;
-    max-width: 1440px;
-    width: 100%;
+header, .weatherMain, .requestedWeather, .weatherDataForm, .firebaseStoredLocations {
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .headerFlexChild {
   align-self: center;
   color: white;
 }
+/* END OF HEADER STYLES */
 
+
+/* TYPOGRAPHY STYLES */
 h1 {
   text-shadow: 1px 1px black;
+}
+
+h2 {
+  text-transform: uppercase;
 }
 
 .chevron {
@@ -65,28 +93,102 @@ h1 {
   text-shadow: 0.5px 0.5px black;
 }
 
-.chevron:hover {
+.chevron:hover, .chevron:focus {
+  transition: 1s all;
   color: black;
   text-shadow: 0.5px 0.5px white;
 }
+/* END OF TYPOGRAPHY STYLES */
 
+/* MAIN STYLES */
 .weatherMain {
   min-height: 100vh;
   color: white;
   background-color: black;
-  display: flex;
   flex-direction: column;
+  justify-content: center;
 }
 
+/* class for div holding all the fetched api data and form for user input */
 .requestedWeather {
   text-align: center;
   align-self: center;
-  display: flex;
   flex-direction: column;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.7);
+  width: 80%;
+  max-width: 500px;
 }
 
-.weatherBg {
-  align-self: flex-start;
+/* ID holding background image in order to dynamically change background image */
+#weatherSection {
+  background-image: url('./cloudsTwo.jpg');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+/* class used in div to hold all the individual data received from api */
+.weatherDataContainer {
+  text-align: center;
   width: 100%;
-  height: 200px;
+  padding: 0 20px 20px;
+}
+
+/* id used to make data not displayed under user submits form */
+#weatherDataContainer{
+   display: none;
+   flex-wrap: wrap;
+   flex-direction: column;
+}
+
+/* styling for stored user locations */
+.firebaseStoredLocations {
+  justify-content: center;
+  padding-bottom: 10px;
+}
+
+/* forecast styles */
+#weatherForecast {
+  display: none;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.forecastDayContainer {
+  margin: 10px;
+}
+
+/* FORM & BUTTON STYLES */
+.weatherDataForm {
+  text-align: center;
+  flex-direction: column;
+  padding: 20px 20px 0;
+}
+
+input[type="text"], button {
+  padding: 10px;
+  margin: 5px;
+}
+
+input[type="text"] {
+  text-align: center;
+}
+
+.saveLocationButton {
+  width: 30%;
+  align-self: center;
+  padding: 5px;
+  margin: 2px;
+}
+
+.removeButton {
+  padding: 1px;
+}
+/* END OF FORM & BUTTON STYLES */
+
+/* FOOTER STYLES */
+footer {
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.7);
 }

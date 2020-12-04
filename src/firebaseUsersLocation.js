@@ -1,3 +1,5 @@
+// FIREBASE IMPORT
+// used to store the users inputted location for future use if they desire 
 import firebase from "firebase/app";
 import "firebase/database";
 
