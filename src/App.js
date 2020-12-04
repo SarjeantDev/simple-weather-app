@@ -242,7 +242,7 @@ class App extends Component {
         
         {/* Main section used to change background */}
         <section
-          className="weatherMain wrapper"
+          className="weatherMain"
           id="weatherSection"
           ref={(el) => { this.weatherSection = el; }}>
 
