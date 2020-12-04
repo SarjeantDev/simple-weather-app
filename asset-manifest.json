@@ -1,23 +1,23 @@
 {
   "files": {
-    "main.css": "/benSarjeantProject5/static/css/main.ed3c3285.chunk.css",
-    "main.js": "/benSarjeantProject5/static/js/main.a907ad56.chunk.js",
-    "main.js.map": "/benSarjeantProject5/static/js/main.a907ad56.chunk.js.map",
-    "runtime-main.js": "/benSarjeantProject5/static/js/runtime-main.f8b1cb05.js",
-    "runtime-main.js.map": "/benSarjeantProject5/static/js/runtime-main.f8b1cb05.js.map",
-    "static/js/2.1b4acf8f.chunk.js": "/benSarjeantProject5/static/js/2.1b4acf8f.chunk.js",
-    "static/js/2.1b4acf8f.chunk.js.map": "/benSarjeantProject5/static/js/2.1b4acf8f.chunk.js.map",
-    "static/js/3.d2909e2a.chunk.js": "/benSarjeantProject5/static/js/3.d2909e2a.chunk.js",
-    "static/js/3.d2909e2a.chunk.js.map": "/benSarjeantProject5/static/js/3.d2909e2a.chunk.js.map",
+    "main.css": "/benSarjeantProject5/static/css/main.ec0a2210.chunk.css",
+    "main.js": "/benSarjeantProject5/static/js/main.5445c41f.chunk.js",
+    "main.js.map": "/benSarjeantProject5/static/js/main.5445c41f.chunk.js.map",
+    "runtime-main.js": "/benSarjeantProject5/static/js/runtime-main.6f71f776.js",
+    "runtime-main.js.map": "/benSarjeantProject5/static/js/runtime-main.6f71f776.js.map",
+    "static/js/2.7b8387a8.chunk.js": "/benSarjeantProject5/static/js/2.7b8387a8.chunk.js",
+    "static/js/2.7b8387a8.chunk.js.map": "/benSarjeantProject5/static/js/2.7b8387a8.chunk.js.map",
+    "static/js/3.1a606b73.chunk.js": "/benSarjeantProject5/static/js/3.1a606b73.chunk.js",
+    "static/js/3.1a606b73.chunk.js.map": "/benSarjeantProject5/static/js/3.1a606b73.chunk.js.map",
     "index.html": "/benSarjeantProject5/index.html",
-    "static/css/main.ed3c3285.chunk.css.map": "/benSarjeantProject5/static/css/main.ed3c3285.chunk.css.map",
-    "static/js/2.1b4acf8f.chunk.js.LICENSE.txt": "/benSarjeantProject5/static/js/2.1b4acf8f.chunk.js.LICENSE.txt",
-    "static/media/index.css": "/benSarjeantProject5/static/media/headerImagePatrickHendry.5ecd1157.jpg"
+    "static/css/main.ec0a2210.chunk.css.map": "/benSarjeantProject5/static/css/main.ec0a2210.chunk.css.map",
+    "static/js/2.7b8387a8.chunk.js.LICENSE.txt": "/benSarjeantProject5/static/js/2.7b8387a8.chunk.js.LICENSE.txt",
+    "static/media/index.css": "/benSarjeantProject5/static/media/cloudsTwo.5717ec08.jpg"
   },
   "entrypoints": [
-    "static/js/runtime-main.f8b1cb05.js",
-    "static/js/2.1b4acf8f.chunk.js",
-    "static/css/main.ed3c3285.chunk.css",
-    "static/js/main.a907ad56.chunk.js"
+    "static/js/runtime-main.6f71f776.js",
+    "static/js/2.7b8387a8.chunk.js",
+    "static/css/main.ec0a2210.chunk.css",
+    "static/js/main.5445c41f.chunk.js"
   ]
 }
