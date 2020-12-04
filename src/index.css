@@ -27,12 +27,21 @@ code {
 
 h1,h2,h3,h4,h5, p {
   margin: 0;
-  padding: 0;
+  padding: 5px;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}
+
+li {
+  list-style: none;
 }
 
 header {
   min-height: 100vh;
-  background-image: url('headerImagePatrickHendry.jpg');
+  background-image: url('./cloudImage.jpg');
   background-position: center;
   background-size: cover;
   display: flex;
@@ -58,6 +67,11 @@ header p {
 
 h1 {
   text-shadow: 1px 1px black;
+  
+}
+
+h2 {
+  text-transform: uppercase;
 }
 
 .chevron {
@@ -65,7 +79,8 @@ h1 {
   text-shadow: 0.5px 0.5px black;
 }
 
-.chevron:hover {
+.chevron:hover, .chevron:focus {
+  transition: 1s all;
   color: black;
   text-shadow: 0.5px 0.5px white;
 }
@@ -75,18 +90,77 @@ h1 {
   color: white;
   background-color: black;
   display: flex;
+  flex-wrap: wrap;
   flex-direction: column;
+  justify-content: center;
 }
 
 .requestedWeather {
   text-align: center;
   align-self: center;
   display: flex;
+  flex-wrap: wrap;
   flex-direction: column;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.7);
+  width: 50%;
+}
+
+#weatherSection {
+  background-image: url('./cloudsTwo.jpg');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 .weatherBg {
   align-self: flex-start;
   width: 100%;
   height: 200px;
+}
+
+.weatherDataContainer {
+  text-align: center;
+  width: 100%;
+  padding: 0 20px;
+}
+
+#weatherDataContainer{
+   display: none;
+   flex-wrap: wrap;
+   flex-direction: column;
+}
+
+
+
+.weatherDataForm {
+  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+}
+
+input[type="text"], button {
+  padding: 10px;
+  margin: 5px;
+}
+
+input[type="text"] {
+  text-align: center;
+}
+
+.removeButton {
+  padding: 2px;
+
+}
+
+.weatherDataFormRadioButtons {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.firebaseStoredLocations {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
