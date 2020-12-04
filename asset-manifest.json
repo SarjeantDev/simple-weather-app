@@ -1,23 +1,23 @@
 {
   "files": {
-    "main.css": "/benSarjeantProject5/static/css/main.ec0a2210.chunk.css",
-    "main.js": "/benSarjeantProject5/static/js/main.5445c41f.chunk.js",
-    "main.js.map": "/benSarjeantProject5/static/js/main.5445c41f.chunk.js.map",
-    "runtime-main.js": "/benSarjeantProject5/static/js/runtime-main.6f71f776.js",
-    "runtime-main.js.map": "/benSarjeantProject5/static/js/runtime-main.6f71f776.js.map",
-    "static/js/2.7b8387a8.chunk.js": "/benSarjeantProject5/static/js/2.7b8387a8.chunk.js",
-    "static/js/2.7b8387a8.chunk.js.map": "/benSarjeantProject5/static/js/2.7b8387a8.chunk.js.map",
-    "static/js/3.1a606b73.chunk.js": "/benSarjeantProject5/static/js/3.1a606b73.chunk.js",
-    "static/js/3.1a606b73.chunk.js.map": "/benSarjeantProject5/static/js/3.1a606b73.chunk.js.map",
+    "main.css": "/benSarjeantProject5/static/css/main.0200e8c7.chunk.css",
+    "main.js": "/benSarjeantProject5/static/js/main.498d54b5.chunk.js",
+    "main.js.map": "/benSarjeantProject5/static/js/main.498d54b5.chunk.js.map",
+    "runtime-main.js": "/benSarjeantProject5/static/js/runtime-main.ea397b56.js",
+    "runtime-main.js.map": "/benSarjeantProject5/static/js/runtime-main.ea397b56.js.map",
+    "static/js/2.c095b508.chunk.js": "/benSarjeantProject5/static/js/2.c095b508.chunk.js",
+    "static/js/2.c095b508.chunk.js.map": "/benSarjeantProject5/static/js/2.c095b508.chunk.js.map",
+    "static/js/3.0f5c0474.chunk.js": "/benSarjeantProject5/static/js/3.0f5c0474.chunk.js",
+    "static/js/3.0f5c0474.chunk.js.map": "/benSarjeantProject5/static/js/3.0f5c0474.chunk.js.map",
     "index.html": "/benSarjeantProject5/index.html",
-    "static/css/main.ec0a2210.chunk.css.map": "/benSarjeantProject5/static/css/main.ec0a2210.chunk.css.map",
-    "static/js/2.7b8387a8.chunk.js.LICENSE.txt": "/benSarjeantProject5/static/js/2.7b8387a8.chunk.js.LICENSE.txt",
-    "static/media/index.css": "/benSarjeantProject5/static/media/cloudsTwo.5717ec08.jpg"
+    "static/css/main.0200e8c7.chunk.css.map": "/benSarjeantProject5/static/css/main.0200e8c7.chunk.css.map",
+    "static/js/2.c095b508.chunk.js.LICENSE.txt": "/benSarjeantProject5/static/js/2.c095b508.chunk.js.LICENSE.txt",
+    "static/media/App.css": "/benSarjeantProject5/static/media/cloudsTwo.5717ec08.jpg"
   },
   "entrypoints": [
-    "static/js/runtime-main.6f71f776.js",
-    "static/js/2.7b8387a8.chunk.js",
-    "static/css/main.ec0a2210.chunk.css",
-    "static/js/main.5445c41f.chunk.js"
+    "static/js/runtime-main.ea397b56.js",
+    "static/js/2.c095b508.chunk.js",
+    "static/css/main.0200e8c7.chunk.css",
+    "static/js/main.498d54b5.chunk.js"
   ]
 }
