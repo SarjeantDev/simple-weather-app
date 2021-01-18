@@ -3,11 +3,31 @@ import { Component } from 'react';
 import './App.css';
 
 class WeatherData extends Component {
-    
+    constructor() {
+        super();
+        this.state = {
+            showForecast: false
+        }
+    }
+
+    // function to toggle the forecast 
+    toggleWeatherForecast = (e) => {
+        if (e.target.textContent === "Show Forecast") {
+            this.setState({
+                showForecast: true
+            })
+            e.target.textContent = "Hide Forecast"
+        } else if (e.target.textContent === "Hide Forecast") {
+            this.setState({
+                showForecast: false
+            })
+            e.target.textContent = "Show Forecast"
+        }
+    }
+
     render() { 
         return (
-            <div className="weatherDataContainer" id="weatherDataContainer">
-
+            <>
                 {/* Setting the dom to reflect weather api data */}
                 <h2>{this.props.weatherLoc}</h2>
                 <h3>{this.props.currentWeathCondition} | {this.props.currentWeath.temp_c}°C </h3>
@@ -19,10 +39,10 @@ class WeatherData extends Component {
                 <button className="saveLocationButton" onClick={this.props.firebaseAddFunc}>Save Location</button> 
                 
                 {/* Button to fire the function toggleWeatherForecast on click */}
-                <button onClick={this.props.weatherForecast}>Show Forecast</button>
+                <button onClick={this.toggleWeatherForecast} className="showForecastButton">Show Forecast</button>
 
                 {/* Div holding the forecast if the user wants */}
-                <div id="weatherForecast">
+                <div className={this.state.showForecast ? 'show' : 'hide'}>
                     {
                         this.props.forecastData.map((dayObj) => {
                             return (
@@ -38,7 +58,8 @@ class WeatherData extends Component {
                     }
                 </div>
                 
-            </div> 
+
+            </>
         )
     }
 }

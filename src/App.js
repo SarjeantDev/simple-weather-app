@@ -24,11 +24,11 @@ class App extends Component {
       forecastWeatherData: [],
       weatherLocation: '',
       userInput: '',
-      weatherLocationBg: '', 
-      currentConditionData: ''
+      weatherLocationBg: 'url(./cloudsTwo.jpg)',
+      currentConditionData: '',
+      showWeather: false
     }
   }
-
 
   // On mount load function that retrieves list of previously saved locations from firebase
   componentDidMount() {
@@ -48,7 +48,6 @@ class App extends Component {
     this.callWeatherAPI(`${this.state.userInput}`);
     this.callUnsplashImgAPI(`${this.state.userInput}`);
   }
-
 
   // Firebase: Function to retrieve list of previously entered locations from Firebase
   storeUserLocationFB() {
@@ -70,7 +69,6 @@ class App extends Component {
     })
   }
   // End of Firebase function
-  
 
   // WeatherAPI: Calling to retrieve weather data when user clicks submit button
   // Function takes the city which is derieved from the users input above
@@ -87,7 +85,10 @@ class App extends Component {
       }
     }).then((apiData) => {
       this.filterWeatherData(apiData.data);    
-      document.getElementById('weatherDataContainer').style.display = 'flex';
+      this.setState({
+        showWeather: true
+      })
+     // document.getElementById('weatherDataContainer').style.display = 'flex';
     }).catch(err => {
       alert("No data for that city, please try again.") 
     })
@@ -171,8 +172,6 @@ class App extends Component {
       this.setState({
         weatherLocationBg: apiData.data.results[0].urls.regular
       })
-      // setting the background image of the section holding all weather data based off of the state
-      document.getElementById('weatherSection').style.backgroundImage = `url(${this.state.weatherLocationBg})`;
       
     }).catch(err => {
       // catching to ensure app won't break
@@ -181,6 +180,13 @@ class App extends Component {
   }
   // End of unsplash api call
 
+  // UPDATED to remove some bad react coding
+  // function to return updated background image 
+  getAppStyle = () => {
+    return {
+      backgroundImage: `url(${this.state.weatherLocationBg})`,
+    }
+  }
   
   // Function to scroll down to the next section - called from chevron click in Header class component
   scrollToWeather = () => {
@@ -223,26 +229,17 @@ class App extends Component {
   // End of Firebase functions
 
 
-  // function to toggle the forecast 
-  toggleWeatherForecast = (e) => {
-    if (e.target.textContent === "Show Forecast") {
-      document.getElementById('weatherForecast').style.display = 'flex';
-      e.target.textContent = "Hide Forecast"  
-    } else if (e.target.textContent === "Hide Forecast") {
-      document.getElementById('weatherForecast').style.display = 'none';
-      e.target.textContent = "Show Forecast"
-    }
-  }
-
-
   render() { 
+    const backgroundStyle = this.getAppStyle();
     return (
       <Fragment>
+      
         <Header scrollFunc={this.scrollToWeather} />
-        
+      
         {/* Main section used to change background */}
         <section
           className="weatherMain"
+          style={backgroundStyle}
           id="weatherSection"
           ref={(el) => { this.weatherSection = el; }}>
 
@@ -280,15 +277,17 @@ class App extends Component {
             </div>
 
             {/* Weather Data class component */}
-            <WeatherData
-              weatherLoc={this.state.weatherLocation}
-              currentWeathCondition={this.state.currentConditionData}
-              currentWeath={this.state.currentWeatherData}
-              bgSrc={this.state.weatherLocationBg}
-              firebaseAddFunc={this.storeLocation}
-              weatherForecast={this.toggleWeatherForecast}
-              forecastData={this.state.forecastWeatherData}
-            />
+            <div className={this.state.showWeather ? 'weatherDataContainer' : 'hide'}>
+              <WeatherData
+                weatherLoc={this.state.weatherLocation}
+                currentWeathCondition={this.state.currentConditionData}
+                currentWeath={this.state.currentWeatherData}
+                bgSrc={this.state.weatherLocationBg}
+                firebaseAddFunc={this.storeLocation}
+                weatherForecast={this.toggleWeatherForecast}
+                forecastData={this.state.forecastWeatherData}
+              />
+            </div>
             
           </section>
           {/* END OF requestedWeather SECTION */}

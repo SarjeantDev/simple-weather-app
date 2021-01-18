@@ -10,6 +10,7 @@ html { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: 
 .srOnly { position: absolute; width: 1px; height: 1px; margin: -1px; border: 0; padding: 0; white-space: nowrap; clip-path: inset(100%); clip: rect(0 0 0 0); overflow: hidden;}
 /* End of Setup Snippet */
 
+
 /* GLOBAL STYLES */
 body {
   margin: 0;
@@ -47,6 +48,19 @@ li {
     margin: 0 auto;
     max-width: 1440px;
     width: 100%;
+}
+
+/* show and hide styles used to toggle displays */
+.show {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.hide {
+  display: none;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 /* END OF GLOBAL STYLES */
 
@@ -107,6 +121,10 @@ h2 {
   background-color: black;
   flex-direction: column;
   justify-content: center;
+  background-image: url('./cloudsTwo.jpg');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 /* class for div holding all the fetched api data and form for user input */
@@ -120,26 +138,13 @@ h2 {
   max-width: 500px;
 }
 
-/* ID holding background image in order to dynamically change background image */
-#weatherSection {
-  background-image: url('./cloudsTwo.jpg');
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
-}
-
 /* class used in div to hold all the individual data received from api */
 .weatherDataContainer {
   text-align: center;
   width: 100%;
   padding: 0 20px 20px;
-}
-
-/* id used to make data not displayed under user submits form */
-#weatherDataContainer{
-   display: none;
-   flex-wrap: wrap;
-   flex-direction: column;
+  flex-wrap: wrap;
+  flex-direction: column;
 }
 
 /* styling for stored user locations */
@@ -149,7 +154,7 @@ h2 {
 }
 
 /* forecast styles */
-#weatherForecast {
+.weatherForecast {
   display: none;
   flex-wrap: wrap;
   justify-content: center;
@@ -184,6 +189,12 @@ input[type="text"] {
 
 .removeButton {
   padding: 1px;
+}
+
+.showForecastButton {
+  width: 100%;
+  justify-self: center;
+  margin: 10px 0;
 }
 /* END OF FORM & BUTTON STYLES */
 
